@@ -6,6 +6,7 @@ class Evento(models.Model):
     descricao = models.TextField(blank=True, null=True)
     data_evento = models.DateTimeField(verbose_name='Data do Evento')
     data_criacao = models.DateTimeField(auto_now=True, verbose_name='Data de Criação')
+    local = models.TextField(blank=True, null=True, verbose_name='Local do evento')
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     class Meta:
         db_table = 'evento'
@@ -15,3 +16,6 @@ class Evento(models.Model):
 
     def get_data_evento(self):
         return self.data_evento.strftime('%d/%m/%Y %H:%M Hrs')
+
+    def get_data_input_evento(self):
+        return self.data_evento.strftime('%Y-%m-%dT%H:%M')
